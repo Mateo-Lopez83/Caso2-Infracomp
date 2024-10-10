@@ -21,9 +21,6 @@ public class Op1 {
         double numFilas = (double)image.alto;
         double numCols = (double)image.ancho;
         int lengMensaje = image.leerLongitud();
-        /*double numFilas = 256;
-        double numCols = 384;
-        int lengMensaje = 5069;*/
         //16 referencias de lectura de los primeros 16 bytes,
         //luego 2 referencias para lectura y escritura de cada bit de caracter, 
         //cada caracter son 8 bits, y la inicialización de cada elemento de Mensaje[i]
