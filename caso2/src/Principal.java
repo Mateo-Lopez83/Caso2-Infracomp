@@ -22,7 +22,13 @@ public class Principal {
                 ruta = "image/"+ruta;
                 opcion1.ejecutar_Opcion(tamanio, ruta);
             }
-            else if (resp.equals("2"))  opcion2.ejecutar_Opcion();
+            else if (resp.equals("2"))  {
+                System.out.print("Ingrese el número de marcos de página: ");
+                int marcos = Integer.parseInt(reader.readLine());
+                System.out.print("Ingrese el nombre del archivo de referencias: ");
+                String ruta = reader.readLine(); 
+                opcion2.ejecutar_Opcion(marcos, ruta);
+            }
             else if (resp.equals("3"))  runtime=false;
         }
         
