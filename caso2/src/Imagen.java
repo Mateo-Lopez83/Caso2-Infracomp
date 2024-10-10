@@ -180,4 +180,4 @@ public class Imagen {
     }
      }
     }
-    } // fin de la clase
+} // fin de la clase
