@@ -17,13 +17,13 @@ public class Op1 {
 
 
     public void ejecutar_Opcion(int tamanioPag, String rutaImagen) throws IOException{
-        /*Imagen image = new Imagen(rutaImagen);
-        int numFilas = image.alto;
-        int numCols = image.ancho;
-        int lengMensaje = image.leerLongitud();*/
-        double numFilas = 256;
+        Imagen image = new Imagen(rutaImagen);
+        double numFilas = (double)image.alto;
+        double numCols = (double)image.ancho;
+        int lengMensaje = image.leerLongitud();
+        /*double numFilas = 256;
         double numCols = 384;
-        int lengMensaje = 5069;
+        int lengMensaje = 5069;*/
         //16 referencias de lectura de los primeros 16 bytes,
         //luego 2 referencias para lectura y escritura de cada bit de caracter, 
         //cada caracter son 8 bits, y la inicialización de cada elemento de Mensaje[i]
@@ -40,8 +40,6 @@ public class Op1 {
         int pagsImagen = (int) Math.ceil((numFilas * numCols * 3) / (double)tamanioPag);
         numPaginaMensaje = pagsImagen;
         int pagsMensaje = (int) Math.ceil((double)lengMensaje / (double)tamanioPag);
-        //System.out.println("numero de referencias: "+numRefs);
-        //System.out.println("numero de paginas totales: "+(pagsImagen+pagsMensaje));
 
         archivo.write("NP="+String.valueOf(pagsImagen+pagsMensaje)+"\n");
         for (int i=0; i<16; i++){
