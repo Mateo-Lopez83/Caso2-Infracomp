@@ -39,7 +39,7 @@ public class Principal {
                 System.out.print("Ingrese el número de caracteres que desea esconder: ");
                 int leng = Integer.parseInt(reader.readLine());
                 Imagen img = new Imagen("imagenes_base/"+imagen);
-                FileReader fr = new FileReader(texto);
+                FileReader fr = new FileReader("textos/"+texto);
                 BufferedReader br = new BufferedReader(fr);
                 char[] caracteres = new char[leng];
                 int numCararcteres = br.read(caracteres, 0, leng);
