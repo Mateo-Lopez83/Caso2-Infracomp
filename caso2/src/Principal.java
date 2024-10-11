@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 
 public class Principal {
@@ -10,7 +11,8 @@ public class Principal {
             System.out.println("Bienvenido al menú principal del caso 2. Selecciona una de las siguientes opciones:");
             System.out.println("1. Opción 1");
             System.out.println("2. Opción 2");
-            System.out.println("3. Salir");
+            System.out.println("3. Esconder un mensaje en una imagen");
+            System.out.println("4. Salir");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String resp = reader.readLine();
             if (resp.equals("1")) {
@@ -19,7 +21,7 @@ public class Principal {
 
                 System.out.print("Ingrese la ruta de la imagen: ");
                 String ruta = reader.readLine(); 
-                ruta = "image/"+ruta;
+                ruta = "image_modificada/"+ruta;
                 opcion1.ejecutar_Opcion(tamanio, ruta);
             }
             else if (resp.equals("2"))  {
@@ -29,7 +31,28 @@ public class Principal {
                 String ruta = reader.readLine(); 
                 opcion2.ejecutar_Opcion(marcos, ruta);
             }
-            else if (resp.equals("3"))  runtime=false;
+            else if (resp.equals("3")){
+                System.out.print("Ingrese el nombre de la imagen en formato bmp: ");
+                String imagen = reader.readLine();
+                System.out.print("Ingrese el nombre del texto en formato .txt: ");
+                String texto = reader.readLine(); 
+                System.out.print("Ingrese el número de caracteres que desea esconder: ");
+                int leng = Integer.parseInt(reader.readLine());
+                Imagen img = new Imagen("imagenes_base/"+imagen);
+                FileReader fr = new FileReader(texto);
+                BufferedReader br = new BufferedReader(fr);
+                char[] caracteres = new char[leng];
+                int numCararcteres = br.read(caracteres, 0, leng);
+                if (numCararcteres<leng) System.out.println("El texto tenía menos caracteres, solo se guardaron "+numCararcteres+" caracteres");
+                img.esconder(caracteres, numCararcteres);
+                System.out.print("Ingrese el nombre de la imagen que desea crear: ");
+                String nomImagen = reader.readLine(); 
+                img.escribirImagen("image_modificada/"+nomImagen);
+                System.out.println("imagen modificada exitosamente");
+                
+                br.close();
+            }
+            else if (resp.equals("4"))  runtime=false;
         }
         
         
