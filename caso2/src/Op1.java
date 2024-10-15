@@ -17,7 +17,14 @@ public class Op1 {
 
 
     public void ejecutar_Opcion(int tamanioPag, String rutaImagen) throws IOException{
-        Imagen image = new Imagen(rutaImagen);
+        Imagen image;
+        try{
+            image = new Imagen(rutaImagen);
+        }catch( Exception e){
+            rutaImagen = "../"+rutaImagen;
+            image = new Imagen(rutaImagen);
+        }
+        
         double numFilas = (double)image.alto;
         double numCols = (double)image.ancho;
         int lengMensaje = image.leerLongitud();
