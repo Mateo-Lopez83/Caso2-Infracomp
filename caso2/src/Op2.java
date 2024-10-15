@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Op2 {
     private int cantPaginas;
@@ -17,8 +19,8 @@ public class Op2 {
     
     
     public Op2() {
-        this.tiempoAcessRAM = tiempoAcessRAM;
-        this.tiempoAcessSwap = tiempoAcessSwap;
+        this.tiempoAcessRAM = 5;
+        this.tiempoAcessSwap = 10;
         this.hits = 0;
         this.fallas = 0;
         this.totalTiempo = 0;
@@ -29,18 +31,29 @@ public class Op2 {
 
         // Leer el archivo de referencias
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-            String linea = br.readLine();
-            String[] referencias = linea.split(" ");
-            this.cantPaginas = referencias.length;
-            paginas = new int[cantPaginas];
-
-            // Convertir las referencias a enteros
-            for (int i = 0; i < cantPaginas; i++) {
-                paginas[i] = Integer.parseInt(referencias[i]);
+            String linea;
+            List<Integer> listaPaginas = new ArrayList<>(); 
+            while ((linea = br.readLine()) != null) {
+                if (linea.startsWith("Imagen") || linea.startsWith("Mensaje")) {
+                    break; // Nos detenemos cuando encontramos la primera referencia válida
+                }
             }
 
-        
-            lru();
+            while (linea != null) {
+                // Procesar línea de referencia
+                String[] partes = linea.split(",");
+                int paginaVirtual = Integer.parseInt(partes[1]); // Página virtual correspondiente
+                listaPaginas.add(paginaVirtual);// Almacenar la página virtual
+                linea = br.readLine();
+            }
+            paginas = new int[listaPaginas.size()];
+            for (int i = 0; i < listaPaginas.size(); i++) {
+                paginas[i] = listaPaginas.get(i);
+            }
+
+            // Actualizar la cantidad de páginas
+            cantPaginas = paginas.length;
+            lru(); 
         } catch (IOException e) {
             System.out.println("Error al leer el archivo de referencias: " + e.getMessage());
         }
@@ -75,7 +88,7 @@ public class Op2 {
     private boolean buscar(int pagActual) {
         boolean encontrado = false;
         for (int i = 0; i < cantFrames; i++) {
-            if (paginas[pagActual] == matriz[i][pagActual]) {
+            if (matriz[i][0] == paginas[pagActual]) {
                 encontrado = true;
                 hits++;
                 totalTiempo += tiempoAcessRAM;
@@ -85,9 +98,7 @@ public class Op2 {
     }
 
     private void llenarFila(int pagActual, int frame) {
-        for (int j = pagActual; j < cantPaginas; j++) {
-            matriz[frame][j] = paginas[pagActual];
-        }
+        matriz[frame][pagActual] = paginas[pagActual];
     }
 
     private int mayorDistancia(int pagActual) {
@@ -169,6 +180,6 @@ public class Op2 {
         System.out.println("Porcentaje de Hits: " + ((double) hits / cantPaginas) * 100 + "%");
         System.out.println("Porcentaje de Fallos: " + ((double) cantFallos / cantPaginas) * 100 + "%");
         System.out.println("Tiempo total de acceso (ms): " + totalTiempo);
-    }    
+    }     
 
 }

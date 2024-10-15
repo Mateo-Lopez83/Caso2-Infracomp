@@ -17,19 +17,21 @@ public class Principal {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String resp = reader.readLine();
             if (resp.equals("1")) {
+                System.out.println("Directorio de trabajo actual: " + System.getProperty("user.dir"));
                 System.out.print("Ingrese el tamaño de cada página (en bytes): ");
                 int tamanio = Integer.parseInt(reader.readLine());
 
                 System.out.print("Ingrese la ruta de la imagen: ");
                 String ruta = reader.readLine(); 
-                ruta = "image_modificada/"+ruta;
+                ruta = "../image_modificada/"+ruta;
                 opcion1.ejecutar_Opcion(tamanio, ruta);
             }
             else if (resp.equals("2"))  {
                 System.out.print("Ingrese el número de marcos de página: ");
                 int marcos = Integer.parseInt(reader.readLine());
-                System.out.print("Ingrese el nombre del archivo de referencias: ");
+                System.out.print("Ingrese la ruta del archivo de referencias: ");
                 String ruta = reader.readLine(); 
+                ruta = "../"+ruta;
                 opcion2.ejecutar_Opcion(marcos, ruta);
             }
             else if (resp.equals("3")) esconderTextoImagen(reader);
