@@ -34,11 +34,13 @@ public class Principal {
                 //ruta = "../"+ruta;
                 //opcion2.ejecutar_Opcion(marcos, ruta);
                 
-                Opc2_2 opcion2 = new Opc2_2(marcos, ruta);
-                opcion2.start();
+                Opc2_2 opcion2_t1 = new Opc2_2(marcos, ruta,1);
+                opcion2_t1.start();
+                Opc2_2 opcion2_t2 = new Opc2_2(marcos, ruta,2);
+                opcion2_t2.start();
 
-                opcion2.join();
-
+                opcion2_t1.join();
+                opcion2_t2.join(); 
             }
             else if (resp.equals("3")) esconderTextoImagen(reader);
             else if (resp.equals("4"))  runtime=false;

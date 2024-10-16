@@ -1,4 +1,5 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ public class Imagen {
     * @pos la matriz imagen tiene los valores correspondientes a la imagen
     * almacenada en el archivo.
     * */
-    public Imagen (String input) {
+    public Imagen (String input) throws FileNotFoundException {
     nombre = new String(input);
     try {
     FileInputStream fis = new FileInputStream(nombre);
@@ -47,7 +48,7 @@ public class Imagen {
      fis.skip(padding);
     }
      fis.close();
-    } catch (IOException e) { e.printStackTrace(); }
+    } catch (IOException e) { throw new FileNotFoundException("File not found: " + input); }
     }
     /**
     * Método para esconder un valor en una matriz imagen.
