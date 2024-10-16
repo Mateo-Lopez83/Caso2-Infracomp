@@ -55,9 +55,15 @@ public class Opc2_2 extends Thread{
                     boolean encontrado = false;
                     synchronized(objetMonitor){
                         for (int k=0; k<marcos.size();k++){
-                            if (marcos.get(k).getNumero()== pagina){
+                            Pagina p = marcos.get(k);
+                            if (p.getNumero()== pagina){
                                 encontrado = true;
                                 hits++;
+                                if (tipo.equals("R")) p.setBit1(true);
+                                if (tipo.equals("R")) {
+                                    p.setBit1(true);
+                                    p.setBit2(true);
+                                }
                             }
                         }
                         if (!encontrado && marcos.size()<numMarcos){
@@ -106,12 +112,14 @@ public class Opc2_2 extends Thread{
                                     }
                                 }
                             }
+                            if (posRemov==-1) posRemov = 0;
                             marcos.remove(posRemov);
                             marcos.add(pagprueba);
                         }
                     }
                     linea = br.readLine();
                     Thread.sleep(1);
+                    //System.out.println("no muerto th1");
                 }
                 br.close();
                 corrert2 = false;
@@ -157,6 +165,9 @@ class  Pagina {
     }
     public void setBit1(boolean bit1) {
         this.bit1 = bit1;
+    }
+    public void setBit2(boolean bit2) {
+        this.bit2 = bit2;
     }
     public int getNumero() {
         return numero;
