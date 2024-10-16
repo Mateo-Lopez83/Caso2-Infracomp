@@ -16,7 +16,7 @@ public class Op1 {
     static int contadorCaracteres=0;
 
 
-    public void ejecutar_Opcion(int tamanioPag, String rutaImagen) throws IOException{
+    public void ejecutar_Opcion(int tamanioPag, String rutaImagen, String archnombre) throws IOException{
         Imagen image;
         try{
             image = new Imagen(rutaImagen);
@@ -33,7 +33,7 @@ public class Op1 {
         //cada caracter son 8 bits, y la inicialización de cada elemento de Mensaje[i]
         // lleva a 16 + (2*8)lengMensaje + lengMensaje = 16+17*lengMensaje
         int numRefs = 16+17*lengMensaje;
-        String archnombre = "Opc1_"+ String.valueOf(lengMensaje)+".txt";
+        //String archnombre = "Opc1_"+ String.valueOf(lengMensaje)+".txt";
 
         FileWriter archivo = new FileWriter(archnombre);
 

@@ -24,7 +24,9 @@ public class Principal {
                 System.out.print("Ingrese la ruta de la imagen: ");
                 String ruta = reader.readLine(); 
                 ruta = "image_modificada/"+ruta;
-                opcion1.ejecutar_Opcion(tamanio, ruta);
+                System.out.print("Ingrese el nombre del archivo de referencias (incluya el .txt): ");
+                String nombre = reader.readLine(); 
+                opcion1.ejecutar_Opcion(tamanio, ruta, nombre);
             }
             else if (resp.equals("2"))  {
                 System.out.print("Ingrese el número de marcos de página: ");
