@@ -58,7 +58,13 @@ public class Principal {
         String texto = reader.readLine(); 
         System.out.print("Ingrese el número de caracteres que desea esconder: ");
         int leng = Integer.parseInt(reader.readLine());
-        Imagen img = new Imagen("imagenes_base/"+imagen);
+        Imagen img;
+        try{
+            img = new Imagen("imagenes_base/"+imagen);
+        }catch( Exception e){
+            String rutaImagen = "../imagenes_base/"+imagen;
+            img = new Imagen(rutaImagen);
+        }
         FileReader fr = new FileReader("textos/"+texto);
         BufferedReader br = new BufferedReader(fr);
         char[] caracteres = new char[leng];
