@@ -130,6 +130,8 @@ public class Opc2_2 extends Thread{
                 System.out.println("Porcentaje de éxito (hits): "+porcentaje+"%");
                 totalTiempo = (tiempoAcessRAM*hits ) + (tiempoAcessSwap*fallas);
                 System.out.println("Tiempo total: "+ totalTiempo + " ms");
+                System.out.println("Tiempo si todos fueran hits: "+tiempoAcessRAM*total+" ms");
+                System.out.println("Tiempo si todos fueran fallos: "+tiempoAcessSwap*total+" ms");
             } catch (Exception e) {
                 e.printStackTrace();
             }
